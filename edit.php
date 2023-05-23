@@ -26,7 +26,7 @@
 
         $id = $_GET["id"];
 
-        // precitanie riadku db podla id auta
+        // precitanie riadku db podla id auta 
         $sql = "SELECT * FROM cars WHERE id=$id";
         $result = $connection->query($sql);
         $row = $result->fetch_assoc();
