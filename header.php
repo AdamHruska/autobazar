@@ -10,6 +10,6 @@
 </head>
 <header>
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="/autobazar/index.php">Autobazar</a>
+        <a class="navbar-brand navbar-text" href="/autobazar/index.php">Autobazar</a>
     </nav>
 </header>

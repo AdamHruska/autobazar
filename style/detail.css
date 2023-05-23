@@ -94,3 +94,14 @@ body{
 .row1 {
     margin: auto;
 }
+
+nav {
+    width: 70%;
+    margin: auto;
+    margin-bottom: 60px;
+}
+
+.navbar-text {
+    margin-left: 50px;
+    font-weight: bold;
+}

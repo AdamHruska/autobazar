@@ -1,8 +1,7 @@
 <?php include 'header.php'; ?>
 <body>
     <div class="container my-5">
-        <h2>List of Cars</h2>
-        <a class="btn btn-primary" href="/autobazar/create.php" role="button">New Car</a>
+        <a class="btn btn-primary mb-4" href="/autobazar/create.php" role="button">New Car</a>
         <br>
         <table class="table">
             <head>
