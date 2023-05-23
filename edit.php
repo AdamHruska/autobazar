@@ -13,6 +13,8 @@
     $model = "";
     $WIN = ""; 
     $dateOfProduction = "";
+    $description = "";
+    $img = "";
     
     $errorMessage = "";
     $successMessage = "";
@@ -40,6 +42,8 @@
         $model = $row["model"];
         $WIN = $row["WIN"]; 
         $dateOfProduction = $row["dateOfProduction"];
+        $description = $row["description"];
+        $img = $row["img"];
 
     }
     else {
@@ -50,16 +54,23 @@
         $model = $_POST["model"];
         $WIN = $_POST["WIN"]; 
         $dateOfProduction = $_POST["dateOfProduction"];
+        $description = $_POST["description"];
+        $img = $_POST["img"];
 
         do {
-            if( empty($id) || empty($make) || empty($model) || empty($WIN) || empty($dateOfProduction) ) {
+            if( empty($id) || empty($make) || empty($model) || empty($WIN) || empty($dateOfProduction) ||  empty($description) || empty($img)) {
                 $errorMessage = "All the fields are required";
                 break;
             }
 
             $sql = "UPDATE cars " . 
-                    "SET make = '$make', model = '$model', WIN = '$WIN', dateOfProduction = '$dateOfProduction' " .
-                    "WHERE id=$id";
+                    "SET make = '$make', 
+                    model = '$model', 
+                    WIN = '$WIN', 
+                    dateOfProduction = '$dateOfProduction', 
+                    description = '$description', 
+                    img = '$img' " .
+                "WHERE id=$id";
             //vykonanie sql query
             $result = $connection->query($sql);
             // test ci sql query prebehlo spravne
@@ -132,6 +143,20 @@
                 <label class="col-sm-3 col-form-label">Date of Production</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="dateOfProduction" value="<?php echo $dateOfProduction; ?>"> 
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Description</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="description" value="<?php echo $description; ?>"> 
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Image link</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="img" value="<?php echo $img; ?>"> 
                 </div>
             </div>
 

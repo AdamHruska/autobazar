@@ -11,6 +11,8 @@ $make = "";
 $model = "";
 $WIN = ""; 
 $dateOfProduction = "";
+$description = "";
+$img = "";
 
 $errorMessage = "";
 $successMessage = "";
@@ -20,16 +22,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $model = $_POST["model"];
     $WIN = $_POST["WIN"];
     $dateOfProduction = $_POST["dateOfProduction"];
+    $description = $_POST["description"];
+    $img = $_POST["img"];
 
     do {
-        if( empty($make) || empty($model) || empty($WIN) || empty($dateOfProduction) ) {
+        if( empty($make) || empty($model) || empty($WIN) || empty($dateOfProduction)  || empty($description) ||  empty($img) ) {
             $errorMessage = "All the fields are required";
             break;
         }
 
         // pridavanie auto do db
-        $sql = "INSERT INTO cars (make, model, WIN, dateOfProduction)" .
-                "VALUES ('$make', '$model', '$WIN', '$dateOfProduction')";
+        $sql = "INSERT INTO cars (make, model, WIN, dateOfProduction, description, img)" .
+                "VALUES ('$make', '$model', '$WIN', '$dateOfProduction', '$description', '$img')";
         $result = $connection->query($sql);
 
         if(!$result) {
@@ -41,6 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $model = "";
         $WIN = ""; 
         $dateOfProduction = "";
+        $description = "";
+        $img = "";
 
         $successMessage = "Car added correctly";
 
@@ -107,6 +113,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="text" class="form-control" name="dateOfProduction" value="<?php echo $dateOfProduction; ?>"> 
                 </div>
             </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Description</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="description" value="<?php echo $description; ?>"> 
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Image link</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="img" value="<?php echo $img; ?>"> 
+                </div>
+            </div>
+            
 
         
            <?php 
