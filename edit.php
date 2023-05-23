@@ -1,55 +1,81 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "autobazar";
+<?php 
 
-//vytvorenie spojenia s Databazou
-$connection = new mysqli($servername, $username, $password, $database);
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "autobazar";
 
-$make = "";
-$model = "";
-$WIN = ""; 
-$dateOfProduction = "";
+    //vytvorenie spojenia s Databazou
+    $connection = new mysqli($servername, $username, $password, $database);
 
-$errorMessage = "";
-$successMessage = "";
+    $id = "";
+    $make = "";
+    $model = "";
+    $WIN = ""; 
+    $dateOfProduction = "";
+    
+    $errorMessage = "";
+    $successMessage = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $make = $_POST["make"];
-    $model = $_POST["model"];
-    $WIN = $_POST["WIN"];
-    $dateOfProduction = $_POST["dateOfProduction"];
-
-    do {
-        if( empty($make) || empty($model) || empty($WIN) || empty($dateOfProduction) ) {
-            $errorMessage = "All the fields are required";
-            break;
+    if( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
+        //GET methoda (vypisat udaje auta)
+        if (!isset($_GET["id"]) ) {
+            header("location: /autobazar/index.php");
+            exit;
         }
 
-        // pridavanie auto do db
-        $sql = "INSERT INTO cars (make, model, WIN, dateOfProduction)" .
-                "VALUES ('$make', '$model', '$WIN', '$dateOfProduction')";
+        $id = $_GET["id"];
+
+        // precitanie riadku db podla id auta
+        $sql = "SELECT * FROM cars WHERE id=$id";
         $result = $connection->query($sql);
+        $row = $result->fetch_assoc();
 
-        if(!$result) {
-            $errorMessage = "Invalid query: " . $connection->error;
-            break;
+        if(!$row) {
+            header("location: /autobazar/index.php");
+            exit;
         }
 
-        $make = "";
-        $model = "";
-        $WIN = ""; 
-        $dateOfProduction = "";
+        $make = $row["make"];
+        $model = $row["model"];
+        $WIN = $row["WIN"]; 
+        $dateOfProduction = $row["dateOfProduction"];
 
-        $successMessage = "Car added correctly";
+    }
+    else {
+        // POST (update dat aut)
+        
+        $id = $_POST["id"];
+        $make = $_POST["make"];
+        $model = $_POST["model"];
+        $WIN = $_POST["WIN"]; 
+        $dateOfProduction = $_POST["dateOfProduction"];
 
-        //redirect na index page
-        header("location: /autobazar/index.php");
-        exit;
+        do {
+            if( empty($id) || empty($make) || empty($model) || empty($WIN) || empty($dateOfProduction) ) {
+                $errorMessage = "All the fields are required";
+                break;
+            }
 
-    } while (false);
-}
+            $sql = "UPDATE cars " . 
+                    "SET make = '$make', model = '$model', WIN = '$WIN', dateOfProduction = '$dateOfProduction' " .
+                    "WHERE id=$id";
+            //vykonanie sql query
+            $result = $connection->query($sql);
+            // test ci sql query prebehlo spravne
+            if (!$result) {
+                $errorMessage = "Invalid query: " . $connection->error;
+                break;
+            }
+
+            $successMessage = "Client updated correctly";
+
+            header("location: /autobazar/index.php");
+            exit;
+
+        } while(false);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
 
         <form method="post">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Make</label>
                 <div class="col-sm-6">
