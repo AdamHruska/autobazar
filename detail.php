@@ -1,14 +1,5 @@
+<?php include 'header.php'; ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/autobazar/style/detail.css">
-</head>
 <body>
 <?php 
 
@@ -45,36 +36,39 @@
               <img src="<?php echo $img;?>" alt="cover" class="cover">
             </div>
     
-            <div class="row1">
-              <div class="col-md-4 col-md-5 col-xs-12">
+            <div class="row1 d-flex w-75">
+              <div class="col-md-4 col-md-5 col-sm-12">
                 <div class="row">
                   <div class="col-sm-3">
-                    Make:
+                    <strong>Make:</strong>
                   </div>
                   <div class="col-sm-9">
                         <?php echo $make; ?>
                   </div>
                   <div class="col-sm-3">
-                    Model:
+                  <strong>Model:</strong>
                   </div>
                   <div class="col-sm-9">
                         <?php echo $model; ?>
                   </div>
                   <div class="col-sm-3">
-                    VIN:
+                  <strong>VIN:</strong>
                   </div>
                   <div class="col-sm-9">
                         <?php echo $WIN; ?>
                   </div>
                   <div class="col-sm-3">
-                    Date of Production:
+                  <strong>Date of Production:</strong>
                   </div>
                   <div class="col-sm-9">
                         <?php echo $dateOfProduction; ?>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-8 col-md-7 col-xs-12">
+              <div class="col-sm-2">
+                  <strong>Description:</strong>
+                  </div>
+              <div class="col-sm-7">
                 <p class="contact-description"><?php echo $description; ?></p>
               </div>
             </div>
