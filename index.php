@@ -50,7 +50,7 @@
                 // citanie dat kazdeho riadku
                 while($row = $result->fetch_assoc()) {
                     echo "
-                    <tr>
+                    <tr onclick=\"window.location='/autobazar/detail.php?id=" . $row['id'] . "'\">
                         <td>$row[id]</td>
                         <td>$row[make]</td>
                         <td>$row[model]</td>
